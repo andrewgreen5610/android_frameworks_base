@@ -98,7 +98,6 @@ public class NavigationBarView extends LinearLayout {
     int mNavigationIconHints = 0;
 
     private Drawable mRecentAltIcon, mRecentAltLandIcon;
-    private Drawable mHomeIcon, mHomeLandIcon;
 
     boolean mWasNotifsButtonVisible = false;
 
@@ -137,8 +136,6 @@ public class NavigationBarView extends LinearLayout {
 
     // performs manual animation in sync with layout transitions
     private final NavTransitionListener mTransitionListener = new NavTransitionListener();
-
-    private Resources mThemedResources;
 
     private class NavTransitionListener implements TransitionListener {
         private boolean mBackTransitioning;
@@ -363,13 +360,10 @@ public class NavigationBarView extends LinearLayout {
     private void getIcons(Resources res) {
         mRecentAltIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear);
         mRecentAltLandIcon = res.getDrawable(R.drawable.ic_sysbar_recent_clear_land);
-        mHomeIcon = res.getDrawable(R.drawable.ic_sysbar_home);
-        mHomeLandIcon = res.getDrawable(R.drawable.ic_sysbar_home_land);
     }
 
-    public void updateResources(Resources res) {
-        //mThemedResources = res;
-        //if (mThemedResources != null)  getIcons(mThemedResources);
+    public void updateResources() {
+        //getIcons(mContext.getResources());
         for (int i = 0; i < mRotatedViews.length; i++) {
             ViewGroup container = (ViewGroup) mRotatedViews[i];
             if (container != null) {
@@ -415,8 +409,7 @@ public class NavigationBarView extends LinearLayout {
                     // ImageView keeps track of the resource ID and if it is the same
                     // it will not update the drawable.
                     iv.setImageDrawable(null);
-                    iv.setImageDrawable(mThemedResources.getDrawable(
-                            R.drawable.ic_sysbar_lights_out_dot_large));
+                    iv.setImageResource(R.drawable.ic_sysbar_lights_out_dot_large);
                 }
             }
         }
@@ -424,7 +417,7 @@ public class NavigationBarView extends LinearLayout {
 
     @Override
     public void setLayoutDirection(int layoutDirection) {
-        if (mThemedResources != null) getIcons(mThemedResources);
+
         super.setLayoutDirection(layoutDirection);
     }
 

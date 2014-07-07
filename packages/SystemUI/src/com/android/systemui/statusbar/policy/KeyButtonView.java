@@ -144,9 +144,9 @@ public class KeyButtonView extends ImageView {
         }
     }
 
-    public void updateResources(Resources res) {
+    public void updateResources() {
         if (mGlowBgId != 0) {
-            mGlowBG = res.getDrawable(mGlowBgId);
+            mGlowBG = mContext.getResources().getDrawable(mGlowBgId);
         }
     }
 
